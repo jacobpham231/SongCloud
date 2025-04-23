@@ -11,7 +11,7 @@ CREATE TABLE 'Artists' (
 DROP TABLE IF EXISTS 'Song';
 
 CREATE TABLE 'Song' (
-    song_id INT(12) NOT NULL,
+    song_id INT(12) NOT NULL PRIMARY KEY,
     title VARCHAR(40) NOT NULL,
     artist_id INT(12) REFERENCES Artists(artist_id),
     duration INT(4),
