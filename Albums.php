@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
           <tr>
               <th>album_id</th>
               <th>name</th>
-              <th>song count></th>
+              <th>song count</th>
               <th>release date</th>
           </tr>";
 }
