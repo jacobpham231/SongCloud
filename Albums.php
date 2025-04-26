@@ -1,4 +1,4 @@
-<?op0php
+<?php
 $servername = "localhost";
 $username = "root";
 $password = "";
