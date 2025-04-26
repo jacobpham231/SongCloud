@@ -28,5 +28,5 @@ while ($row = $result -> fetch_assoc()) {
         </tr>';
 }
 
-echo "</table>';
+echo "</table>";
 ?>
