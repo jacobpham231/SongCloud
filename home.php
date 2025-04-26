@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>SongCloud</title>
     <style>
         body {
@@ -22,13 +19,13 @@
             margin: 10px;
             font-size: 18px;
             color: white;
-            background-color: #2e4057;
+            background-color: #0056b3;
             text-decoration: none;
             border-radius: 8px;
             transition: background-color 0.3s ease;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #2e4057;
         }
     </style>
 </head>
