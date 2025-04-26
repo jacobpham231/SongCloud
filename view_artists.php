@@ -11,7 +11,7 @@ $search_country = '';
 
 // handle POST requests
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get and sanitize input
+    // sanitize input
     $search_genre = isset($_POST['genre']) ? $conn->real_escape_string($_POST['genre']) : '';
     $search_country = isset($_POST['country']) ? $conn->real_escape_string($_POST['country']) : '';
 }
@@ -27,7 +27,7 @@ if (!empty($search_country)) {
 
 $result = $conn->query($sql);
 
-echo '<body style="background-color: #f3dfc1"; text-align: center; display: inline-block;>';
+echo '<body style="background-color: #f3dfc1;">';
 
 // search form
 echo '
@@ -41,6 +41,8 @@ echo '
         
         <input type="submit" value="Search" style="margin-left: 10px;">
         <input type="button" value="Clear" onclick="window.location.href=window.location.pathname" style="margin-left: 10px;">
+
+        <input type="button" value="Add Artist" onclick="window.location.href=\'add_artist.php\'" style="margin-left: 10px;">
     </div>
 </form>
 ';
