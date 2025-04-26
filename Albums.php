@@ -23,7 +23,7 @@ while ($row = $result -> fetch_assoc()) {
   echo '<tr>
           <td> '.$row['album_id'].' </td>
           <td> '.$row['name'].' </td>
-          <td> '.$rpw['num_songs'].' </td>
+          <td> '.$row['num_songs'].' </td>
           <td> '.$row['release_date'].' </td>
         </tr>';
 }
