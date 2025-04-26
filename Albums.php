@@ -9,10 +9,24 @@ $sql = "SELECT * FROM album";
 
 $result = $conn -> query($sql);
 
-while ($row = $result -> fetch_assoc()) {
-  echo "album_id : ".$row['album_id']."<br>";
-  echo "name : ".$row['name']."<br>";
-  echo "song count : ".$row['num_songs']."<br>";
-  echo "release date : ".$row['release_date']."<br>";
+if ($result->num_rows > 0) {
+  echo "<table style='border: solid 1px black;'>
+          <tr>
+              <th>album_id</th>
+              <th>name</th>
+              <th>song count></th>
+              <th>release date</th>
+          </tr>";
 }
+
+while ($row = $result -> fetch_assoc()) {
+  echo '<tr>
+          <td> '.row['album_id'].' </td>
+          <td> '.row['name'].' </td>
+          <td> '.rpw['num_songs'].' </td>
+          <td> '.row['release_date'].' </td>
+        </tr>';
+}
+
+echo "</table>';
 ?>
