@@ -66,6 +66,7 @@ if($result->num_rows > 0) {
             <td>'.$row['genre'].'</td>
             <td>'.$row['debut'].'</td>
             <td>'.$row['country'].'</td>
+            <td style="border: solid 1px black;"> <a href="editartist.php?artistID='.$row['artist_id'].'">Edit/Delete</a></td>
         </tr>';
     }
     echo "</table>";
