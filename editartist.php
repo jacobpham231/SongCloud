@@ -26,6 +26,8 @@ if(isset($_POST['updatebtn']))
 	if($resultupdate) //if the update is done successfully
 		{
 		echo "Records updated successfully";
+		header("Location: view_artists.php");
+        exit();
 		}
 }
 // delete logic
