@@ -5,6 +5,8 @@ $password = "";
 $dbname = "SongCloud";
 $conn = new mysqli ($servername, $username, $password, $dbname) or die("Connect failed: %s\n". $conn -> error);
 
+if (
+
 $sql = "SELECT * FROM album";
 
 $result = $conn -> query($sql);
