@@ -11,22 +11,39 @@ $search_country = '';
 
 // handle POST requests
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // sanitize input
-    $search_genre = isset($_POST['genre']) ? $conn->real_escape_string($_POST['genre']) : '';
-    $search_country = isset($_POST['country']) ? $conn->real_escape_string($_POST['country']) : '';
+    $search_genre = $_POST['genre'] ?? '';
+    $search_country = $_POST['country'] ?? '';
 }
 
 // logic for search feature
 $sql = "SELECT * FROM Artists WHERE 1=1";
+$types = '';
+$params = [];
+
+// Add conditions for search
 if (!empty($search_genre)) {
-    $sql .= " AND genre LIKE '%$search_genre%'";
+    $sql .= " AND genre LIKE ?";
+    $types .= 's';
+    $params[] = "%$search_genre%";
 }
 if (!empty($search_country)) {
-    $sql .= " AND country LIKE '%$search_country%'";
+    $sql .= " AND country LIKE ?";
+    $types .= 's';
+    $params[] = "%$search_country%";
 }
 
-$result = $conn->query($sql);
+// Prepare and execute the statement
+$stmt = $conn->prepare($sql);
+if ($stmt === false) {
+    die("Error preparing statement: " . $conn->error);
+}
 
+if (!empty($types)) {
+    $stmt->bind_param($types, ...$params);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
 echo '<body style="background-color: #f3dfc1;">';
 
 // search form
@@ -76,3 +93,10 @@ if($result->num_rows > 0) {
 
 $conn->close();
 ?>
+<div style="position: fixed; bottom: 20px; right: 20px;">
+    <a href="home.php" style="display: inline-block; padding: 10px 20px; 
+           background-color: #0056b3; color: white; text-decoration: none; 
+           border-radius: 5px; font: Arial;">
+        Home
+    </a>
+</div>

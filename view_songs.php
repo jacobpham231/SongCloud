@@ -4,17 +4,19 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "SongCloud";
-$conn = new mysqli($servername, $username, $password, $dbname) or die ("Failed to connect to database". $conn -> error);
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 $search_artist = '';
 
 // handle POST requests
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // sanitize input
-    $search_artist = isset($_POST['artist']) ? $conn->real_escape_string($_POST['artist']) : '';
+    $search_artist = $_POST['artist'] ?? '';
 }
 
-// logic for search feature
 $sql = "SELECT s.song_id, s.title, 
                a.name as artist_name, a.artist_id,
                al.name as album_name, al.album_id,
@@ -23,20 +25,28 @@ $sql = "SELECT s.song_id, s.title,
         JOIN Artists a ON s.artist_id = a.artist_id
         LEFT JOIN Album al ON s.album_id = al.album_id
         WHERE 1=1";
+
 if (!empty($search_artist)) {
-    $sql .= " AND a.name LIKE '%$search_artist%'";
+    $sql .= " AND a.name LIKE ?";
 }
-$result = $conn->query($sql);
+
+$stmt = $conn->prepare($sql);
+
+if (!empty($search_artist)) {
+    $search_param = "%$search_artist%";
+    $stmt->bind_param("s", $search_param);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
 
 echo '<body style="background-color: #f3dfc1;">';
 
-// search form
 echo '
 <form method="POST" action="">
     <div style="margin: 20px 0; text-align: center;">
-        <label for="genre">Search by Artist:</label>
+        <label for="artist">Search by Artist:</label>
         <input type="text" id="artist" name="artist" value="'.htmlspecialchars($search_artist).'" style="border: solid 1px black; border-radius: 3px;">
-        
         
         <input type="submit" value="Search" style="margin-left: 10px;">
         <input type="button" value="Clear" onclick="window.location.href=window.location.pathname" style="margin-left: 10px;">
@@ -55,6 +65,7 @@ if($result->num_rows > 0) {
             <th>Artist Name</th>
             <th>Duration</th>
             <th>Album Name</th>
+            <th>Actions</th>
         </tr>";
     
     while ($row = $result->fetch_assoc()) {
@@ -70,8 +81,16 @@ if($result->num_rows > 0) {
     }
     echo "</table>";
 } else {
-    echo "<p>No artists found matching your criteria.</p>";
+    echo "<p>No songs found matching your criteria.</p>";
 }
 
+$stmt->close();
 $conn->close();
 ?>
+<div style="position: fixed; bottom: 20px; right: 20px;">
+    <a href="home.php" style="display: inline-block; padding: 10px 20px; 
+           background-color: #0056b3; color: white; text-decoration: none; 
+           border-radius: 5px; font: Arial;">
+        Home
+    </a>
+</div>
