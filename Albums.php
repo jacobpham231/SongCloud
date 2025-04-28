@@ -9,13 +9,6 @@ $sql = "SELECT * FROM album";
 
 $result = $conn -> query($sql);
 
-echo '
-\<form method="POST" action="">
-    <div style="margin: 20px 0; text-align: center;">
-        <input type="button" value="Add Album" onclick="window.location.href=\'add_album.php\'" style="margin-left: 10px;">
-    </div>
-</form>';
-
 if ($result->num_rows > 0) {
 echo "<table style='border: solid 1px black;'>
         <tr>
