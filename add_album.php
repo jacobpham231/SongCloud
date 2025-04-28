@@ -50,9 +50,7 @@ if(isset($_POST['inserttb'])) {
 </div>
 
 <div style="position: fixed; bottom: 20px; right: 20px;">
-    <a href="home.php" style="display: inline-block; padding: 10px 20px; 
-           background-color: #0056b3; color: white; text-decoration: none; 
-           border-radius: 5px; font-weight: Arial;">
+    <a href="home.php">
         Home
     </a>
 </div>
