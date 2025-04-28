@@ -12,23 +12,17 @@ if ($conn->connect_error) {
 }
 
 if(isset($_POST['inserttb'])) { 
-    $stmt = $conn->prepare("INSERT INTO album (album_id, name, num_songs, artist_id, release_date) VALUES (?, ?, ?, ?, ?)");
+    $album_id = intval($_POST['album_id'] ?? 0);
+    $name = trim($_POST['name'] ?? '');
+    $song_count = intval($_POST['num_songs'] ?? 0);
+    $artist_id = intval($_POST['artist_id'] ?? 0);
+    $release_year = intval($_POST['release_date'] ?? 0);
     
-    $stmt->bind_param("isiii", 
-        $_POST['album_id'],
-        $_POST['name'],
-        $_POST['num_songs'],
-        $_POST['artist_id'],
-        $_POST['release_date']
-    );
-    
-    if($stmt->execute()) {
-        echo "<div style='text-align:center;color:green;'>Records inserted successfully</div>";
-    } else {
-        echo "<div style='text-align:center;color:red;'>Error: " . $stmt->error . "</div>";
+    if ($album_id <= 0 || empty($name) || $artist_id <= 0 || $release_year <= 0) {
+        die("Error: Please enter valid data");
     }
-    
-    $stmt->close();
+
+    // TODO: FINISH
 }
 ?>
 
