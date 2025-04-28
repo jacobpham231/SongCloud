@@ -29,4 +29,17 @@ while ($row = $result -> fetch_assoc()) {
 }
 
 echo "</table>";
+
+echo '
+\<form method="POST" action="">
+    <div style="margin: 20px 0; text-align: center;">
+        <label for="artist">Search by Artist:</label>
+        <input type="text" id="artist" name="artist" value="'.htmlspecialchars($search_artist).'" style="border: solid 1px black; border-radius: 3px;">
+        
+        <input type="submit" value="Search" style="margin-left: 10px;">
+        <input type="button" value="Clear" onclick="window.location.href=window.location.pathname" style="margin-left: 10px;">
+
+        <input type="button" value="Add Song" onclick="window.location.href=\'add_album.php\'" style="margin-left: 10px;">
+    </div>
+</form>';
 ?>
