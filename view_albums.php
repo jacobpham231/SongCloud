@@ -30,3 +30,11 @@ while ($row = $result -> fetch_assoc()) {
 
 echo "</table>";
 ?>
+
+<div style="position: fixed; bottom: 20px; right: 20px;">
+    <a href="home.php" style="display: inline-block; padding: 10px 20px; 
+           background-color: #0056b3; color: white; text-decoration: none; 
+           border-radius: 5px; font-weight: Arial;">
+        Home
+    </a>
+</div>
