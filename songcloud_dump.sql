@@ -95,3 +95,16 @@ INSERT INTO Song (song_id, title, artist_id, duration, album_id) VALUES
 (1019, 'Echoes in Snow', 19, 220, 119),
 (1020, 'Neon Heart', 20, 215, 120);
 
+DROP TABLE IF EXISTS User;
+
+CREATE TABLE User (
+    username VARCHAR(40) NOT NULL PRIMARY KEY,
+    password VARCHAR(40) NOT NULL,
+    loggedIn Binary NOT NULL
+);
+
+INSERT INTO User (username, password, loggedIn) VALUES
+('BobBarker02', 'abc123', 0),
+('JohnSmith31', 'xyz987', 0),
+('GeorgeJohnson', 'password', 0),
+('TonyStark', 'IAMIRONMAN', 0);
